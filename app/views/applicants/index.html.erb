@@ -1,0 +1,3 @@
+<% @applicants.each do |app| %>
+  <h2><%= link_to app.name, "applicants/#{app.id}" %></h2>
+<% end %>

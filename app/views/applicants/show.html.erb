@@ -1,0 +1,34 @@
+<h2><%= @applicant.name %></h2>
+<div class="address">
+  <%= @applicant.street %>
+  <%= @applicant.city %>
+  <%= @applicant.state %>
+  <%= @applicant.zip %><br>
+</div>
+
+<div class="pets">
+  <h4>All of <%= @applicant.name %> pets:</h4>
+  <% @applicant.pets.each do |pet| %>
+    <li><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></li>
+  <% end %>
+</div>
+
+<summary class="description">
+  <%= @applicant.description %>
+</summary>
+
+<div class="status">
+  <p>Application Status: <%= @applicant.status %></p>
+  <% if @applicant.status == "In Progress" %>
+    <%= render partial: "search_pet", locals: { path: "/applicants/#{@applicant.id}" } %>
+  <% end %>
+
+  <% if params[:name] %>
+    <% @pets.each do |pet| %>
+      <%= pet.name %>
+      <form method="patch" action="/applicants/update" class="button_to">
+      <input value="Adopt this Pet" type="submit" />
+      </form>
+    <% end %>
+  <% end %>
+</div>
